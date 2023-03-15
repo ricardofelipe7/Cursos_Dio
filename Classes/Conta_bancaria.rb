@@ -9,9 +9,10 @@ class ContaBancaria
 
         if saldo > valor
             #aceito
-            de
+            debitar(valor)
+            outra_conta.depositar(valor)
         else
-            #nao faço nada
+           raise 'Não consegui transferir! Saldo insuficiente.'
         end
     end
 
@@ -19,4 +20,12 @@ class ContaBancaria
         @valor
     end
 
+        private 
+    def debitar(valor_para_debitar)
+        @valor -= valor_para_debitar
+    end
+        protected
+    def depositar(valor_para_depositar)
+        @valor += valor_para_depositar
+    end
 end
