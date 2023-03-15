@@ -1,4 +1,4 @@
-require "./CursoDioMe/Classes/Conta_bancaria"
+require "Contabancaria"
 
 conta_ricardo = ContaBancaria.new('ricardo', 100)
 conta_pessoa2 = ContaBancaria.new('pessoa2', 200)
