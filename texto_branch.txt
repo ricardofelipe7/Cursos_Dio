@@ -1,0 +1,4 @@
+21/03/2023
+
+- aprendizado sobre branch e comandos checkout, push.
+- definição de cada funções do github.
