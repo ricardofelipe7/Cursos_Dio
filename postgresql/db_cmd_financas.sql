@@ -38,3 +38,23 @@ CREATE TABLE conta_corrente (
     FOREIGN KEY (banco_numero, agencia_numero) REFERENCES agencia (banco_numero, numero),
     FOREIGN KEY (cliente_numero) REFERENCES cliente (numero)
 );
+
+CREATE TABLE tipo_transacao (
+    id SMALLSERIAL PRIMARY KEY,
+    nome VARCHAR(50) NOT NULL,
+    ativo BOOLEAN NOT NULL DEFAULT TRUE,
+    data_criacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+);
+
+CREATE TABLE cliente_transacoes (
+    id BIGSERIAL PRIMARY KEY,
+    banco_numero INTEGER NOT NULL,
+    agencia_numero INTEGER NOT NULL,
+    conta_corrente_numero BIGINT NOT NULL,
+    conta_corrente_digito SMALLINT NOT NULL,
+    cliente_numero BIGINT NOT NULL,
+    tipo_transacao_id SMALLINT NOT NULL,
+    valor NUMERIC(15,2) NOT NULL,
+    data_criacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (banco_numero, agencia_numero, conta_corrente_numero, conta_corrente_digito, cliente_numero) REFERENCES conta_corrente (banco_numero, agencia_numero, numero, digito, cliente_numero)
+);
