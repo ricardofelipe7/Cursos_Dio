@@ -30,4 +30,35 @@ LEFT JOIN banco ON banco.numero = agencia.banco_numero;
 SELECT banco.numero, banco.nome, agencia.numero, agencia.nome FROM banco
 FULL JOIN agencia ON agencia.banco_numero = banco.numero;
 
-CREATE TABLE IF NOT EXISTS tabela_a (id serial p)
+CREATE TABLE IF NOT EXISTS tabela_a (id serial PRIMARY KEY, valor VARCHAR(10));
+CREATE TABLE IF NOT EXISTS tabela_b (id serial PRIMARY KEY, valor VARCHAR(10));
+
+INSERT INTO tabela_a (valor) VALUES ('teste1');
+INSERT INTO tabela_a (valor) VALUES ('teste2');
+INSERT INTO tabela_a (valor) VALUES ('teste3');
+INSERT INTO tabela_a (valor) VALUES ('teste4');
+
+INSERT INTO tabela_b (valor) VALUES ('teste_a');
+INSERT INTO tabela_b (valor) VALUES ('teste_b');
+INSERT INTO tabela_b (valor) VALUES ('teste_c');
+INSERT INTO tabela_b (valor) VALUES ('teste_d');
+
+SELECT tbla.valor, tblb.valor FROM tabela_a
+CROSS JOIN tabela_b tblb;
+
+DROP TABLE IF EXISTS tabela_a;
+DROP TABLE IF EXISTS tabela_b;
+
+SELECT banco.nome,
+       agencia.nome,
+       conta_corrente.numero,
+       conta_corrente.digito,
+       cliente.nome
+FROM banco
+JOIN agencia ON agencia.banco_numero = banco.numero
+JOIN conta_corrente
+    -- ON conta_corrente.banco_numero = agencia.banco_numero
+    ON conta_corrente.banco_numero = banco.numero
+    AND conta_corrente.agencia_numero = agencia.numero
+JOIN cliente
+    ON cliente.numero = conta_corrente.cliente_numero;
